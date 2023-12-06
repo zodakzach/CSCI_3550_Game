@@ -25,7 +25,7 @@ public class DirectionalLineController : MonoBehaviour
         // Calculate the angle between the player and mouse
         float angle = Mathf.Atan2(originalDirection.y, originalDirection.x) * Mathf.Rad2Deg;
 
-        // Limit the angle to a specific range (e.g., 120 degrees)
+        // Limit the angle to a specific range (e.g., 90 degrees)
         float limitedAngle = Mathf.Clamp(angle, playerTransform.eulerAngles.z - 30f, playerTransform.eulerAngles.z + 60f);
 
         // Calculate the new direction after limiting the rotation
