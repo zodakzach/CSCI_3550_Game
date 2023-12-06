@@ -47,3 +47,6 @@ TagManager:
   - name: Player
     uniqueID: 3886905977
     locked: 0
+  - name: Boulder
+    uniqueID: 2157767147
+    locked: 0
