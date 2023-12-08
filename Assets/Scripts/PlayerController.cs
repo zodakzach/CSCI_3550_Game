@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float force;
 
-    private DirectionalLineController directionalLine;
-
     [SerializeField] private CinemachineVirtualCamera cam;
+
+    private DirectionalLineController directionalLine;
 
     private PlayerAnimation anim;
 
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int maxThrows = 5;
 
     private bool throwing;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,24 +47,29 @@ public class PlayerController : MonoBehaviour
     {
         if (!powerMeterOn || throwing){ return; }
 
-        if (ThrowPowerMeter.value == ThrowPowerMeter.maxValue)
+        if (ThrowPowerMeter.value == 0)
+        {
+            ThrowPowerMeter.value = 1;
+        }
+
+        if (ThrowPowerMeter.value >= ThrowPowerMeter.maxValue)
         {
             reverse = true;
         }
-        else if (ThrowPowerMeter.value == 0)
+        else if (ThrowPowerMeter.value < 1)
         {
             reverse = false;
         }
 
         if ((ThrowPowerMeter.value < ThrowPowerMeter.maxValue) && !reverse)
         {
-            ThrowPowerMeter.value++;
+            ThrowPowerMeter.value *= 1.1f;
         }
         else if ((ThrowPowerMeter.value <= ThrowPowerMeter.maxValue) && reverse)
         {
-            ThrowPowerMeter.value--;
+            ThrowPowerMeter.value /= 1.1f;
         }
-    }
+}
 
     // Throw is called by the PlayerInput Component attached to the object as a unity event when the user triggers the 'Throw' input action
     public void Throw(InputAction.CallbackContext context)
@@ -120,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
         if (boulder != null)
         {
-            cam.Follow = newBoulder.transform;
+            boulder.SetFollowCam(cam);
             boulder.ThrowObject((ThrowPowerMeter.value * force), directionalLine.Direction.normalized);
         }
 

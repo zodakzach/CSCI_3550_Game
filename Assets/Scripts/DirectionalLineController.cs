@@ -5,7 +5,7 @@ public class DirectionalLineController : MonoBehaviour
     public LineRenderer directionLine;
     public Transform playerTransform;
 
-    // Private field to store the original direction
+    // Private field to store the direction
     private Vector2 limitedDirection;
 
     // Public property with a getter
