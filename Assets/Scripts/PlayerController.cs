@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Cinemachine;
 using System;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     // Tower object representing the player's base
     [SerializeField] private Tower tower;
+
+    [SerializeField] private GameObject instructionsBackground;
 
     // DirectionalLineController for visualizing the throw direction
     private DirectionalLineController directionalLine;
@@ -114,6 +117,11 @@ public class PlayerController : MonoBehaviour
     // Method called after the throw animation is finished
     public void FinishedThrow()
     {
+        if (instructionsBackground.activeInHierarchy == true)
+        {
+            instructionsBackground.SetActive(false);
+        }
+
         if (numOfBoulders > 0)
         {
             // Launch the next available boulder
